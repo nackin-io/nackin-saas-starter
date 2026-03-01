@@ -88,7 +88,7 @@ export default function LandingPage() {
             SaaSKit
           </Link>
           <div className="hidden items-center gap-8 md:flex">
-            <Link href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Features
             </Link>
             <Link href="#pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -123,10 +123,9 @@ export default function LandingPage() {
             🚀 Production-ready from day one
           </Badge>
           <h1 className="mx-auto max-w-4xl text-4xl font-bold tracking-tight sm:text-6xl md:text-7xl">
-            Launch your SaaS in{' '}
-            <span className="bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text text-transparent">
-              days, not months
-            </span>
+            Ship a production SaaS in{' '}
+            <span className="bg-gradient-to-r from-violet-500 to-indigo-500 bg-clip-text text-transparent">14 days flat</span>{' '}
+            — auth, billing &amp; dashboard included
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">
             Everything you need to ship a production SaaS — auth, billing, dashboard, admin panel, and more. Built with Next.js 15, Supabase, and Stripe.
@@ -178,10 +177,14 @@ export default function LandingPage() {
               </div>
               <div className="col-span-3 space-y-4">
                 <div className="grid grid-cols-3 gap-3">
-                  {['Total Revenue', 'Active Users', 'MRR Growth'].map((label) => (
-                    <div key={label} className="rounded-lg border bg-muted/30 p-3">
-                      <div className="text-xs text-muted-foreground">{label}</div>
-                      <div className="mt-1 h-5 rounded bg-violet-500/20" />
+                  {[
+                    { label: 'Monthly Revenue', value: '$12,847' },
+                    { label: 'Active Users', value: '2,341' },
+                    { label: 'MRR Growth', value: '+18.3%' },
+                  ].map((metric) => (
+                    <div key={metric.label} className="rounded-lg border bg-muted/30 p-3">
+                      <div className="text-xs text-muted-foreground">{metric.label}</div>
+                      <div className="mt-1 text-lg font-semibold text-foreground">{metric.value}</div>
                     </div>
                   ))}
                 </div>
@@ -351,17 +354,40 @@ export default function LandingPage() {
               </p>
             </div>
             {[
-              { title: 'Product', links: ['Features', 'Pricing', 'Changelog', 'Roadmap'] },
-              { title: 'Resources', links: ['Documentation', 'Blog', 'GitHub', 'Support'] },
-              { title: 'Legal', links: ['Privacy', 'Terms', 'Cookies'] },
+              {
+                title: 'Product',
+                links: [
+                  { label: 'Features', href: '/features' },
+                  { label: 'Pricing', href: '/pricing' },
+                  { label: 'Changelog', href: '/changelog' },
+                  { label: 'Roadmap', href: '#' },
+                ],
+              },
+              {
+                title: 'Resources',
+                links: [
+                  { label: 'Documentation', href: '/docs' },
+                  { label: 'Blog', href: '/blog' },
+                  { label: 'GitHub', href: 'https://github.com/nackin-io/nackin-saas-starter' },
+                  { label: 'Support', href: '#' },
+                ],
+              },
+              {
+                title: 'Legal',
+                links: [
+                  { label: 'Privacy', href: '#' },
+                  { label: 'Terms', href: '#' },
+                  { label: 'Cookies', href: '#' },
+                ],
+              },
             ].map((col) => (
               <div key={col.title}>
                 <h3 className="text-sm font-semibold">{col.title}</h3>
                 <ul className="mt-3 space-y-2">
                   {col.links.map((link) => (
-                    <li key={link}>
-                      <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                        {link}
+                    <li key={link.label}>
+                      <Link href={link.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                        {link.label}
                       </Link>
                     </li>
                   ))}
